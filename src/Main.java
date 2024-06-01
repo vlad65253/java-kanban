@@ -19,11 +19,22 @@ public class Main {
         System.out.println("Список подзадач");
         System.out.println(tm.getSubTaskList());
 
-        tm.updateSubTask(new SubTask("купить материалы", "В стройремо", 2, TaskStatus.DONE, 3));
+        tm.updateSubTask(new SubTask("купить материалы", "В стройремо", 2, TaskStatus.IN_PROGRESS, 3));
         tm.updateSubTask(new SubTask("нарисовать эскиз", "взять блокнотик и придумать", 2, TaskStatus.DONE, 4));
         tm.updateTask(new Task(0, "поситаться", "надо постираться в общаге", TaskStatus.IN_PROGRESS));
 
+
         System.out.println("------------------------После обновления-------------------------------");
+        System.out.println("Список обычных задач");
+        System.out.println(tm.getTaskList());
+        System.out.println("Список эпиков");
+        System.out.println(tm.getEpicList());
+        System.out.println("Список подзадач");
+        System.out.println(tm.getSubTaskList());
+
+        tm.delSubTaskById(3);
+
+        System.out.println("------------------------После удаления-------------------------------");
         System.out.println("Список обычных задач");
         System.out.println(tm.getTaskList());
         System.out.println("Список эпиков");

@@ -1,7 +1,5 @@
-import javax.management.openmbean.TabularDataSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class TaskManager {
     static int id = 0;
@@ -55,12 +53,20 @@ public class TaskManager {
 
     }
 
-    public void delEpicById() {
+    public void delEpicById(Integer id) {
+        for (Integer a : libraryEpic.get(id).idSubTask){
+            delSubTaskById(a);
+        }
         libraryEpic.remove(id);
+
     }
 
-    public void delSubTaskById() {
+    public void delSubTaskById(Integer id) {
+        //надо если есть это значение в idSubTask
+        Integer mainId = librarySubTask.get(id).main_id;
         librarySubTask.remove(id);
+        checkStatus(getProgressSubTaskForEpic(mainId), mainId);
+
     }
 
     public void createTask(Task task) {
@@ -76,7 +82,8 @@ public class TaskManager {
     }
 
     public void createSubTask(SubTask subTask) {
-        librarySubTask.put(id, subTask);
+        subTask.id = id;
+        librarySubTask.put(subTask.id, subTask);
         libraryEpic.get(subTask.main_id).idSubTask.add(subTask.id);
         checkStatus(getProgressSubTaskForEpic(subTask.main_id), subTask.main_id);
         id++;
@@ -96,7 +103,6 @@ public class TaskManager {
     public void updateSubTask(SubTask subTask) {
         librarySubTask.put(subTask.id, subTask);
         checkStatus(getProgressSubTaskForEpic(subTask.main_id), subTask.main_id);
-        libraryEpic.get(subTask.main_id).idSubTask.add(subTask.id);
     }
 
     public ArrayList<String> getAllSubTaskForEpic(Integer id) {

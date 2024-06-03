@@ -1,16 +1,20 @@
-public class SubTask extends Task{
-    int main_id;
+public class SubTask extends Task {
+    private int idMain;
 
-    public SubTask(String name, String description, Integer main_id, TaskStatus taskStatus) {
+    public SubTask(String name, String description, Integer idMain, TaskStatus taskStatus) {
         super(name, description, taskStatus);
-        this.main_id = main_id;
+        this.idMain = idMain;
 
     }
-    public SubTask(String name, String description, Integer main_id, TaskStatus taskStatus, Integer id) {
+
+    public SubTask(String name, String description, Integer idMain, TaskStatus taskStatus, Integer id) {
         super(name, description, taskStatus);
-        this.main_id = main_id;
+        this.idMain = idMain;
         this.id = id;
 
     }
 
+    public int getIdMain() {
+        return idMain;
+    }
 }

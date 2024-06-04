@@ -12,7 +12,6 @@ public class Task {
         this.name = name;
         this.description = description;
         this.taskStatus = taskStatus;
-
     }
 
     public Task(String name, String description) {
@@ -25,7 +24,6 @@ public class Task {
         this.description = description;
         this.taskStatus = taskStatus;
         this.id = id;
-
     }
 
     public void setId(Integer id) {
@@ -69,5 +67,19 @@ public class Task {
         return Objects.equals(id, otherTask.id) &&
                 Objects.equals(name, otherTask.name) &&
                 Objects.equals(description, otherTask.description);
+    }
+    @Override
+    public int hashCode(){
+        int hash = 17;
+        if (id != null) {
+            hash = id.hashCode();
+        }
+        if (name != null) {
+            hash = hash + name.hashCode();
+        }
+        if (description != null) {
+            hash = hash + description.hashCode();
+        }
+        return hash;
     }
 }

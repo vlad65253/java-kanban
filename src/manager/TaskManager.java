@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TaskManager {
-    private static int id;
+    private int id;
     private HashMap<Integer, Task> libraryTask = new HashMap<>();
     private HashMap<Integer, Epic> libraryEpic = new HashMap<>();
     private HashMap<Integer, SubTask> librarySubTask = new HashMap<>();
@@ -28,7 +28,6 @@ public class TaskManager {
 
     public void delAllTask() {
         libraryTask.clear();
-
     }
 
     public void delAllEpic() {
@@ -45,7 +44,6 @@ public class TaskManager {
 
     public void delTaskById(Integer id) {
         libraryTask.remove(id);
-
     }
 
     public void delEpicById(Integer id) {
@@ -53,7 +51,6 @@ public class TaskManager {
             delSubTaskById(subTaskId);
         }
         libraryEpic.remove(id);
-
     }
 
     public void delSubTaskById(Integer id) {
@@ -61,7 +58,6 @@ public class TaskManager {
         libraryEpic.get(mainId).getIdSubTask().remove(id);
         librarySubTask.remove(id);
         checkStatus(mainId);
-
     }
 
     public void createTask(Task task) {
@@ -82,8 +78,6 @@ public class TaskManager {
         libraryEpic.get(subTask.getIdMain()).getIdSubTask().add(subTask.getId());
         checkStatus(subTask.getIdMain());
         id++;
-
-
     }
 
     public void updateTask(Task task) {

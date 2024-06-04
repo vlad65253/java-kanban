@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 public class SubTask extends Task {
     private int idMain;
@@ -12,7 +12,7 @@ public class SubTask extends Task {
     public SubTask(String name, String description, Integer idMain, TaskStatus taskStatus, Integer id) {
         super(name, description, taskStatus);
         this.idMain = idMain;
-        this.id = id;
+        this.setId(id);
 
     }
 

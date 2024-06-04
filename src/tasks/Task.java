@@ -1,12 +1,32 @@
-package Tasks;
+package tasks;
 
 import java.util.Objects;
 
 public class Task {
-    Integer id;
+    private Integer id;
     private String name;
     private String description;
-    TaskStatus taskStatus = TaskStatus.NEW;
+    private TaskStatus taskStatus = TaskStatus.NEW;
+
+    public Task(String name, String description, TaskStatus taskStatus) {
+        this.name = name;
+        this.description = description;
+        this.taskStatus = taskStatus;
+
+    }
+
+    public Task(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Task(Integer id, String name, String description, TaskStatus taskStatus) {
+        this.name = name;
+        this.description = description;
+        this.taskStatus = taskStatus;
+        this.id = id;
+
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -40,26 +60,6 @@ public class Task {
         return taskStatus;
     }
 
-    public Task(String name, String description, TaskStatus taskStatus) {
-        this.name = name;
-        this.description = description;
-        this.taskStatus = taskStatus;
-
-    }
-
-    public Task(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
-    public Task(Integer id, String name, String description, TaskStatus taskStatus) {
-        this.name = name;
-        this.description = description;
-        this.taskStatus = taskStatus;
-        this.id = id;
-
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -69,15 +69,5 @@ public class Task {
         return Objects.equals(id, otherTask.id) &&
                 Objects.equals(name, otherTask.name) &&
                 Objects.equals(description, otherTask.description);
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 17;
-        if (id != null) {
-            hash = hash + id.hashCode();
-        }
-        hash = hash * 31;
-        return hash;
     }
 }

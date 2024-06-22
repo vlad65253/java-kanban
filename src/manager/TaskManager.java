@@ -13,11 +13,17 @@ public interface TaskManager {
     ArrayList<Task> getTaskList();
 
     ArrayList<Epic> getEpicList();
+
     ArrayList<Task> getHistory();
+
     ArrayList<SubTask> getSubTaskList();
+
     Task getTask(Integer id);
+
     SubTask getSubtask(Integer id);
+
     Epic getEpic(Integer id);
+
     void delAllTask();
 
     void delAllEpic();
@@ -43,6 +49,4 @@ public interface TaskManager {
     void updateSubTask(SubTask subTask);
 
     ArrayList<SubTask> getAllSubTaskForEpic(Integer id);
-
-    void checkStatus(Integer id);
 }

@@ -12,7 +12,9 @@ public class InMemoryTaskManager implements TaskManager {
     private HashMap<Integer, Task> libraryTask = new HashMap<>();
     private HashMap<Integer, Epic> libraryEpic = new HashMap<>();
     private HashMap<Integer, SubTask> librarySubTask = new HashMap<>();
-    private  HistoryManager historyManager;
+
+    private HistoryManager historyManager;
+
     @Override
     public ArrayList<Task> getTaskList() {
         return new ArrayList<>(libraryTask.values());
@@ -30,20 +32,23 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getTask(Integer id) {
-        historyManager.add(libraryTask.get(id));
-        return libraryTask.get(id);
+        Task task = libraryTask.get(id);
+        historyManager.add(task);
+        return task;
     }
 
     @Override
     public SubTask getSubtask(Integer id) {
-        historyManager.add(librarySubTask.get(id));
-        return librarySubTask.get(id);
+        SubTask subTask = librarySubTask.get(id);
+        historyManager.add(subTask);
+        return subTask;
     }
 
     @Override
     public Epic getEpic(Integer id) {
-        historyManager.add(libraryEpic.get(id));
-        return libraryEpic.get(id);
+        Epic epic = libraryEpic.get(id);
+        historyManager.add(epic);
+        return epic;
     }
 
     @Override
@@ -147,8 +152,7 @@ public class InMemoryTaskManager implements TaskManager {
         return subTaskForEpic;
     }
 
-    @Override
-    public void checkStatus(Integer id) {
+    private void checkStatus(Integer id) {
         int countNew = 0;
         int countDone = 0;
         ArrayList<TaskStatus> subTaskForEpic = new ArrayList<>();

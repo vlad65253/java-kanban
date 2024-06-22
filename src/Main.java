@@ -63,13 +63,13 @@ public class Main {
             System.out.println(epic);
         }
 
-        System.out.println("\nПоиск по айди задачи");
-        Task task = taskManager.getTask(1);
-        System.out.println(task);
-
         System.out.println("\nПоиск по айди эпика");
         Epic epic = taskManager.getEpic(4);
         System.out.println(epic);
+
+        System.out.println("\nПоиск по айди задачи");
+        Task task = taskManager.getTask(1);
+        System.out.println(task);
 
         System.out.println("\nПоиск по айди подзадачи");
         SubTask subtask1 = taskManager.getSubtask(5);

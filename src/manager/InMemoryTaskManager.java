@@ -9,9 +9,9 @@ import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
     private int id = 0;
-    private HashMap<Integer, Task> libraryTask = new HashMap<>();
-    private HashMap<Integer, Epic> libraryEpic = new HashMap<>();
-    private HashMap<Integer, SubTask> librarySubTask = new HashMap<>();
+    private final HashMap<Integer, Task> libraryTask = new HashMap<>();
+    private final HashMap<Integer, Epic> libraryEpic = new HashMap<>();
+    private final HashMap<Integer, SubTask> librarySubTask = new HashMap<>();
     public HistoryManager historyManager = new InMemoryHistoryManager();
 
     @Override

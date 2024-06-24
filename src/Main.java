@@ -49,10 +49,18 @@ public class Main {
             System.out.println(task);
         }
 
+        System.out.println("\nОбновление эпика'");
+        Epic epicUpd = new Epic("Уборка new", "Убраться в квартире new");
+        epicUpd.setId(3);
+        taskManager.updateEpic(epicUpd);
+        for (Epic epic1 : taskManager.getEpicList()) {
+            System.out.println(epic1);
+        }
+
         System.out.println("\nОбновление подзадачи");
         SubTask subtask = new SubTask("Чистка салона", "Пропылесосить салон", 4, TaskStatus.IN_PROGRESS);
         subtask.setTaskStatus(TaskStatus.IN_PROGRESS);
-        subtask.setId(8);
+        subtask.setId(4);
         taskManager.updateSubTask(subtask);
         for (SubTask subtask1 : taskManager.getSubTaskList()) {
             System.out.println(subtask1);
@@ -72,7 +80,7 @@ public class Main {
         System.out.println(task);
 
         System.out.println("\nПоиск по айди подзадачи");
-        SubTask subtask1 = taskManager.getSubtask(5);
+        SubTask subtask1 = taskManager.getSubtask(6);
         System.out.println(subtask1);
 
         System.out.println("\nПоиск подзадач для эпика по айди");
@@ -88,13 +96,13 @@ public class Main {
         }
 
         System.out.println("\nУдаление подзадачи по айди");
-        taskManager.delSubTaskById(7);
+        taskManager.delSubTaskById(6);
         for (SubTask subtask2 : taskManager.getSubTaskList()) {
             System.out.println(subtask2);
         }
 
         System.out.println("\nУдаление эпика по айди");
-        taskManager.delEpicById(5);
+        taskManager.delEpicById(3);
         for (Epic epic1 : taskManager.getEpicList()) {
             System.out.println(epic1);
         }

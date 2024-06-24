@@ -12,4 +12,12 @@ public class Epic extends Task {
     public ArrayList<Integer> getIdSubTask() {
         return idSubTask;
     }
+
+    public void delIdSubTask(Integer id) {
+        idSubTask.remove(id);
+    }
+
+    public void addIdSubTask(Integer idSub) {
+        idSubTask.add(idSub);
+    }
 }

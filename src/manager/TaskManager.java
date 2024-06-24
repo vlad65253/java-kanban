@@ -5,9 +5,6 @@ import tasks.SubTask;
 import tasks.Task;
 
 import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Objects;
 
 public interface TaskManager {
     ArrayList<Task> getTaskList();
@@ -36,11 +33,11 @@ public interface TaskManager {
 
     void delSubTaskById(Integer id);
 
-    void createTask(Task task);
+    int createTask(Task task);
 
-    void createEpic(Epic epic);
+    int createEpic(Epic epic);
 
-    void createSubTask(SubTask subTask);
+    int createSubTask(SubTask subTask);
 
     void updateTask(Task task);
 

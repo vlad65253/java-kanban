@@ -8,12 +8,11 @@ import tasks.TaskStatus;
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
-    private int id;
+    private int id = 0;
     private HashMap<Integer, Task> libraryTask = new HashMap<>();
     private HashMap<Integer, Epic> libraryEpic = new HashMap<>();
     private HashMap<Integer, SubTask> librarySubTask = new HashMap<>();
-
-    private HistoryManager historyManager;
+    public HistoryManager historyManager = new InMemoryHistoryManager();
 
     @Override
     public ArrayList<Task> getTaskList() {
@@ -77,8 +76,12 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void delEpicById(Integer id) {
-        for (Integer subTaskId : libraryEpic.get(id).getIdSubTask()) {
-            delSubTaskById(subTaskId);
+        Epic epic = libraryEpic.get(id);
+        if (epic != null) {
+            for (Integer subTaskId : epic.getIdSubTask()) {
+                librarySubTask.remove(subTaskId);
+            }
+            epic.getIdSubTask().clear();
         }
         libraryEpic.remove(id);
     }
@@ -86,32 +89,37 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void delSubTaskById(Integer id) {
         Integer mainId = librarySubTask.get(id).getIdMain();
-        libraryEpic.get(mainId).getIdSubTask().remove(id);
+        libraryEpic.get(mainId).delIdSubTask(id);
         librarySubTask.remove(id);
         checkStatus(mainId);
     }
 
     @Override
-    public void createTask(Task task) {
+    public int createTask(Task task) {
         task.setId(id);
         libraryTask.put(id, task);
         id++;
+        return task.getId();
     }
 
     @Override
-    public void createEpic(Epic epic) {
+    public int createEpic(Epic epic) {
         epic.setId(id);
         libraryEpic.put(id, epic);
         id++;
+        return epic.getId();
     }
 
     @Override
-    public void createSubTask(SubTask subTask) {
+    public int createSubTask(SubTask subTask) {
         subTask.setId(id);
-        librarySubTask.put(subTask.getId(), subTask);
-        libraryEpic.get(subTask.getIdMain()).getIdSubTask().add(subTask.getId());
-        checkStatus(subTask.getIdMain());
+        if (libraryEpic.get(subTask.getIdMain()) != null) {
+            librarySubTask.put(subTask.getId(), subTask);
+            libraryEpic.get(subTask.getIdMain()).addIdSubTask(subTask.getId());
+            checkStatus(subTask.getIdMain());
+        }
         id++;
+        return subTask.getId();
     }
 
     @Override

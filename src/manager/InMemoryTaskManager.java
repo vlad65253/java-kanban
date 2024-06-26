@@ -8,11 +8,11 @@ import tasks.TaskStatus;
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
-    private int id = 0;
+    private int id = 1;
     private final HashMap<Integer, Task> libraryTask = new HashMap<>();
     private final HashMap<Integer, Epic> libraryEpic = new HashMap<>();
     private final HashMap<Integer, SubTask> librarySubTask = new HashMap<>();
-    public HistoryManager historyManager = new InMemoryHistoryManager();
+    private final HistoryManager historyManager = new InMemoryHistoryManager();
 
     @Override
     public ArrayList<Task> getTaskList() {
@@ -131,8 +131,8 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void updateEpic(Epic epic) {
-        if (libraryTask.containsKey(epic.getId())) {
-            libraryTask.put(epic.getId(), epic);
+        if (libraryEpic.containsKey(epic.getId())) {
+            libraryEpic.put(epic.getId(), epic);
         }
         checkStatus(epic.getId());
     }

@@ -16,7 +16,7 @@ class TaskTest {
 
         taskManager.createTask(task);
         taskManager.createTask(task1);
-        task1.setId(0);
+        task1.setId(1);
         assertEquals(task.getId(), task1.getId(), "Это не одна задача");
     }
 }

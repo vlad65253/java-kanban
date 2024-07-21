@@ -5,13 +5,14 @@ import tasks.SubTask;
 import tasks.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskManager {
     ArrayList<Task> getTaskList();
 
     ArrayList<Epic> getEpicList();
 
-    ArrayList<Task> getHistory();
+    List<Task> getHistory();
 
     ArrayList<SubTask> getSubTaskList();
 

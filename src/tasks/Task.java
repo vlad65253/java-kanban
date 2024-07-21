@@ -68,8 +68,9 @@ public class Task {
                 Objects.equals(name, otherTask.name) &&
                 Objects.equals(description, otherTask.description);
     }
+
     @Override
-    public int hashCode(){
+    public int hashCode() {
         int hash = 17;
         if (id != null) {
             hash = id.hashCode();

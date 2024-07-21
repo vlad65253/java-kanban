@@ -29,15 +29,16 @@ public class InMemoryHistoryManager implements HistoryManager, Comparator<Task> 
 
     @Override
     public int compare(Task o1, Task o2) {
-        if(o1.getId() > o2.getId()){
+        if (o1.getId() > o2.getId()) {
             return 1;
-        } else if(o1.getId() < o2.getId()){
+        } else if (o1.getId() < o2.getId()) {
             return -1;
-        } else{
+        } else {
             return 0;
         }
     }
-    public static class Node{
+
+    public static class Node {
         private Node prev;
         private final Task task;
         private Node next;
@@ -49,12 +50,13 @@ public class InMemoryHistoryManager implements HistoryManager, Comparator<Task> 
         }
 
     }
-    public static class MyLinkedList{
+
+    public static class MyLinkedList {
         private Node head;
         private Node tail;
         private final Map<Integer, Node> myMap = new HashMap<>();
 
-        private void linkList(Task task){
+        private void linkList(Task task) {
             Node newNode = new Node(task, tail, null);
 
             if (tail == null) {
@@ -65,7 +67,8 @@ public class InMemoryHistoryManager implements HistoryManager, Comparator<Task> 
             tail = newNode;
             myMap.put(task.getId(), newNode);
         }
-        private void remoteNode(Node node){
+
+        private void remoteNode(Node node) {
             if (node != null) {
                 myMap.remove(node.task.getId());
                 Node prev = node.prev;
@@ -89,11 +92,12 @@ public class InMemoryHistoryManager implements HistoryManager, Comparator<Task> 
                 }
             }
         }
-        private List<Task> getTasks(){
+
+        private List<Task> getTasks() {
             List<Task> tasksList = new ArrayList<>();
             Node element = head;
 
-            while(element != null){
+            while (element != null) {
                 tasksList.add(element.task);
                 element = element.next;
             }

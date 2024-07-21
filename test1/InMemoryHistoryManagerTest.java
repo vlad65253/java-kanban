@@ -45,8 +45,9 @@ class InMemoryHistoryManagerTest {
         }
         assertEquals(1, historyManager.getHistory().size(), "История не соответствует ожидаемому значению");
     }
+
     @Test
-    void checkUniqueTask(){
+    void checkUniqueTask() {
         historyManager.add(task);
         historyManager.add(epic);
         historyManager.add(task);
@@ -55,7 +56,7 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
-    void checkRemoveLastElement(){
+    void checkRemoveLastElement() {
         historyManager.add(task);
         historyManager.add(epic);
         historyManager.add(subtask);
@@ -75,6 +76,7 @@ class InMemoryHistoryManagerTest {
 
         assertEquals(historyManager.getHistory(), List.of(task, epic));
     }
+
     @Test
     void removeMidHistoryTask() {
         historyManager.add(task);

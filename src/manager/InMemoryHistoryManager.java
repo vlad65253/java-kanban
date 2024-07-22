@@ -4,7 +4,7 @@ import tasks.Task;
 
 import java.util.*;
 
-public class InMemoryHistoryManager implements HistoryManager, Comparator<Task> {
+public class InMemoryHistoryManager implements HistoryManager {
 
     private final MyLinkedList history = new MyLinkedList();
 
@@ -27,18 +27,7 @@ public class InMemoryHistoryManager implements HistoryManager, Comparator<Task> 
         return history.getTasks();
     }
 
-    @Override
-    public int compare(Task o1, Task o2) {
-        if (o1.getId() > o2.getId()) {
-            return 1;
-        } else if (o1.getId() < o2.getId()) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    public static class Node {
+    private static class Node {
         private Node prev;
         private final Task task;
         private Node next;
@@ -51,7 +40,7 @@ public class InMemoryHistoryManager implements HistoryManager, Comparator<Task> 
 
     }
 
-    public static class MyLinkedList {
+    private static class MyLinkedList {
         private Node head;
         private Node tail;
         private final Map<Integer, Node> myMap = new HashMap<>();

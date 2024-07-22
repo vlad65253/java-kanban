@@ -47,23 +47,14 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
-    void checkUniqueTask() {
-        historyManager.add(task);
-        historyManager.add(epic);
-        historyManager.add(task);
-
-        assertNotEquals(task, historyManager.getHistory().getFirst(), "История не правильно записывает таски");
-    }
-
-    @Test
-    void checkRemoveLastElement() {
+    void removeFirstHistoryTask() {
         historyManager.add(task);
         historyManager.add(epic);
         historyManager.add(subtask);
 
         historyManager.remove(task.getId());
 
-        assertNotEquals(epic, historyManager.getHistory().getLast(), "Задача не удалилась из истории");
+        assertEquals(historyManager.getHistory(), List.of(epic, subtask));
     }
 
     @Test

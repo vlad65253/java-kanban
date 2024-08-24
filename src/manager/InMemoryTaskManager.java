@@ -8,11 +8,20 @@ import tasks.TaskStatus;
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
+
     private int id = 1;
-    private final HashMap<Integer, Task> libraryTask = new HashMap<>();
-    private final HashMap<Integer, Epic> libraryEpic = new HashMap<>();
-    private final HashMap<Integer, SubTask> librarySubTask = new HashMap<>();
+    protected final HashMap<Integer, Task> libraryTask = new HashMap<>();
+    protected final HashMap<Integer, Epic> libraryEpic = new HashMap<>();
+    protected final HashMap<Integer, SubTask> librarySubTask = new HashMap<>();
     private final HistoryManager historyManager = new InMemoryHistoryManager();
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public ArrayList<Task> getTaskList() {
@@ -180,6 +189,9 @@ public class InMemoryTaskManager implements TaskManager {
     private void checkStatus(Integer id) {
         int countNew = 0;
         int countDone = 0;
+        if(libraryEpic.containsKey(id)){
+            return;
+        }
         ArrayList<TaskStatus> subTaskForEpic = new ArrayList<>();
         for (Integer subTask : libraryEpic.get(id).getIdSubTask()) {
             subTaskForEpic.add(librarySubTask.get(subTask).getTaskStatus());

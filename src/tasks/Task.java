@@ -9,7 +9,7 @@ public class Task {
     private String name;
     private String description;
     private TaskStatus taskStatus = TaskStatus.NEW;
-    private TypeTask typeTask = TypeTask.TASK;
+    TypeTask typeTask = TypeTask.TASK;
 
     public Task(String name, String description, TaskStatus taskStatus) {
         this.name = name;

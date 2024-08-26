@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Epic extends Task {
     private final ArrayList<Integer> idSubTask = new ArrayList<>();
-    private TypeTask typeTask = TypeTask.EPIC;
 
     public Epic(String name, String description) {
         super(name, description);

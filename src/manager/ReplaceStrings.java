@@ -16,8 +16,8 @@ public class ReplaceStrings {
         if (typeTask.equals("EPIC")) {
             return new Epic(id, name, description, status);
         } else if (typeTask.equals("SUBTASK")) {
-            int epicId = id;
-            return new SubTask(epicId, name, description, epicId, status);
+            int epicId = Integer.parseInt(split[5]);
+            return new SubTask(id, name, description, epicId, status);
         } else {
             return new Task(id, name, description, status);
 

@@ -20,7 +20,7 @@ class InMemoryTaskManagerTest {
     @BeforeEach
     void beforeEach() {
         taskManager = new InMemoryTaskManager();
-        task = new Task("Test addNewTask description", "Test addNewTask", TaskStatus.NEW);
+        task = new Task( "Test addNewTask description", "Test addNewTask", TaskStatus.NEW);
         epic = new Epic("Test addNewEpic description", "Test addNewEpic");
         subtask = new SubTask("Test addNewSubtask description", "Test addNewSubtask", 1, TaskStatus.NEW);
     }
@@ -148,7 +148,7 @@ class InMemoryTaskManagerTest {
     void updateSubTaskTest(){
         taskManager.createEpic(epic);
         int subTaskId = taskManager.createSubTask(subtask);
-        taskManager.updateSubTask(new SubTask(1, "123", "456", 2, TaskStatus.DONE));
+        taskManager.updateSubTask(new SubTask(2, "123", "456", 1, TaskStatus.DONE));
         assertEquals(taskManager.getSubtask(subTaskId).getTaskStatus(), TaskStatus.DONE, "Подзадача не обновилась");
     }
 

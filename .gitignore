@@ -10,6 +10,9 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Добавил iml файл в игнор(его обычно игнорируют всегда)
+java-kanban.iml
+
 # Package Files #
 *.jar
 *.war

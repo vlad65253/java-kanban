@@ -145,15 +145,15 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void updateSubTaskTest(){//ДОДЕЛАТЬ
+    void updateSubTaskTest(){
         taskManager.createEpic(epic);
         int subTaskId = taskManager.createSubTask(subtask);
-        taskManager.updateSubTask(new SubTask("123", "456", 1 , TaskStatus.DONE, 2));
+        taskManager.updateSubTask(new SubTask(1, "123", "456", 2, TaskStatus.DONE));
         assertEquals(taskManager.getSubtask(subTaskId).getTaskStatus(), TaskStatus.DONE, "Подзадача не обновилась");
     }
 
     @Test
-    void updateEpicTest(){//ДОДЕЛАТЬ
+    void updateEpicTest(){
         int epicId = taskManager.createEpic(epic);
         taskManager.createSubTask(subtask);
         taskManager.updateEpic(new Epic("123", "456", 1));
@@ -161,7 +161,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void getSubTaskEpicMethodTest(){//ДОДЕЛАТЬ
+    void getSubTaskEpicMethodTest(){
         int epicId = taskManager.createEpic(epic);
         int subTaskId = taskManager.createSubTask(subtask);
         ArrayList<SubTask> subTaskTemp = taskManager.getAllSubTaskForEpic(epicId);

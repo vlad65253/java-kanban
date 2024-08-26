@@ -87,7 +87,7 @@ public class Task {
         return hash;
     }
 
-    public TypeTask getTypeTask(){
+    public TypeTask getTypeTask() {
         return this.typeTask;
     }
 }

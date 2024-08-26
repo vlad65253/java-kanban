@@ -11,7 +11,7 @@ public class SubTask extends Task {
         this.idMain = idMain;
     }
 
-    public SubTask(String name, String description, Integer idMain, TaskStatus taskStatus, Integer id) {
+    public SubTask(Integer id, String name, String description, Integer idMain, TaskStatus taskStatus) {
         super(id, name, description, taskStatus);
         this.idMain = idMain;
     }

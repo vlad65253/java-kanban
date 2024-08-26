@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class Main {
 
 
-
     public static void main(String[] args) {
         File file = new File("File.csv");
         FileBackedTaskManager fileManager = FileBackedTaskManager.loadFromFile(file);
@@ -56,7 +55,7 @@ public class Main {
 
         System.out.println("\nОбновление эпика'");
         Epic epicUpd = new Epic("Уборка new", "Убраться в квартире new");
-        epicUpd.setId(3);
+        epicUpd.setId(4);
         fileManager.updateEpic(epicUpd);
         for (Epic epic1 : fileManager.getEpicList()) {
             System.out.println(epic1);
@@ -89,7 +88,7 @@ public class Main {
         System.out.println(subtask1);
 
         System.out.println("\nПоиск подзадач для эпика по айди");
-        ArrayList<SubTask> subtaskByEpicId = fileManager.getAllSubTaskForEpic(3);
+        ArrayList<SubTask> subtaskByEpicId = fileManager.getAllSubTaskForEpic(4);
         for (SubTask subtask2 : subtaskByEpicId) {
             System.out.println(subtask2);
         }
@@ -101,13 +100,13 @@ public class Main {
         }
 
         System.out.println("\nУдаление подзадачи по айди");
-        fileManager.delSubTaskById(6);
+        fileManager.delSubTaskById(8);
         for (SubTask subtask2 : fileManager.getSubTaskList()) {
             System.out.println(subtask2);
         }
 
         System.out.println("\nУдаление эпика по айди");
-        fileManager.delEpicById(3);
+        fileManager.delEpicById(4);
         for (Epic epic1 : fileManager.getEpicList()) {
             System.out.println(epic1);
         }

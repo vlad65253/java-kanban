@@ -1,5 +1,7 @@
 package tasks;
 
+import manager.TypeTask;
+
 public class SubTask extends Task {
     private final int idMain;
 
@@ -15,5 +17,9 @@ public class SubTask extends Task {
 
     public int getIdMain() {
         return idMain;
+    }
+    @Override
+    public TypeTask getTypeTask() {
+        return TypeTask.SUBTASK;
     }
 }

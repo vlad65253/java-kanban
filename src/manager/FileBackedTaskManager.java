@@ -25,7 +25,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             if (Files.exists(file.toPath())) {
                 Files.delete(file.toPath());
             }
-            Files.createFile(file.toPath());
         } catch (IOException e) {
             throw new ManagerSaveException("Не удалось найти файл", e);
         }

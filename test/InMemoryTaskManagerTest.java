@@ -11,18 +11,20 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class InMemoryTaskManagerTest {
+class InMemoryTaskManagerTest<T extends InMemoryTaskManager> {
 
-    private static TaskManager taskManager;
-    private static Task task;
-    private static Epic epic;
-    private static SubTask subtask;
+    protected static TaskManager taskManager;
+    protected static Task task;
+    protected static Epic epic;
+    protected static SubTask subtask;
     @BeforeEach
     void beforeEach() {
-        taskManager = new InMemoryTaskManager();
-        task = new Task( "Test addNewTask description", "Test addNewTask", TaskStatus.NEW);
-        epic = new Epic("Test addNewEpic description", "Test addNewEpic");
-        subtask = new SubTask("Test addNewSubtask description", "Test addNewSubtask", 1, TaskStatus.NEW);
+        task = new Task("addNewTaskDescription", "addNewTask", TaskStatus.NEW);
+
+        epic = new Epic("addNewEpicDescription", "addNewEpic");
+
+        subtask = new SubTask("addNewSubtaskDescription", "addNewSubtask", 2, TaskStatus.NEW);
+
     }
 
     @Test

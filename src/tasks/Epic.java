@@ -18,7 +18,6 @@ public class Epic extends Task {
 
     public Epic(Integer id, String name, String description, TaskStatus taskStatus) {
         super(id, name, description, taskStatus);
-        this.typeTask = TypeTask.EPIC;
     }
 
     public ArrayList<Integer> getIdSubTask() {
@@ -31,5 +30,9 @@ public class Epic extends Task {
 
     public void addIdSubTask(Integer idSub) {
         idSubTask.add(idSub);
+    }
+    @Override
+    public TypeTask getTypeTask() {
+        return TypeTask.EPIC;
     }
 }

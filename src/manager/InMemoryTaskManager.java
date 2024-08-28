@@ -189,9 +189,6 @@ public class InMemoryTaskManager implements TaskManager {
     private void checkStatus(Integer id) {
         int countNew = 0;
         int countDone = 0;
-        if (libraryEpic.containsKey(id)) {
-            return;
-        }
         ArrayList<TaskStatus> subTaskForEpic = new ArrayList<>();
         for (Integer subTask : libraryEpic.get(id).getIdSubTask()) {
             subTaskForEpic.add(librarySubTask.get(subTask).getTaskStatus());

@@ -1,9 +1,10 @@
+import manager.InMemoryTaskManager;
 import manager.Managers;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ManagersTest {
+class ManagersTest<F extends InMemoryTaskManager> {
 
     @Test
     void getDefault() {

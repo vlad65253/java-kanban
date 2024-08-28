@@ -17,6 +17,7 @@ class InMemoryTaskManagerTest<T extends InMemoryTaskManager> {
     protected static Task task;
     protected static Epic epic;
     protected static SubTask subtask;
+
     @BeforeEach
     void beforeEach() {
         task = new Task("addNewTaskDescription", "addNewTask", TaskStatus.NEW);
@@ -118,21 +119,21 @@ class InMemoryTaskManagerTest<T extends InMemoryTaskManager> {
     }
 
     @Test
-    void deleteTaskByIdTest(){
+    void deleteTaskByIdTest() {
         int taskId = taskManager.createTask(task);
         taskManager.delTaskById(taskId);
         assertNull(taskManager.getTask(taskId), "Задача не удалилась");
     }
 
     @Test
-    void deleteEpicByIdTest(){
+    void deleteEpicByIdTest() {
         int epicId = taskManager.createEpic(epic);
         taskManager.delEpicById(epicId);
         assertNull(taskManager.getEpic(epicId), "Задача не удалилась");
     }
 
     @Test
-    void deleteSubTaskByIdTest(){
+    void deleteSubTaskByIdTest() {
         taskManager.createEpic(epic);
         int subtaskId = taskManager.createSubTask(subtask);
         taskManager.delSubTaskById(subtaskId);
@@ -140,14 +141,14 @@ class InMemoryTaskManagerTest<T extends InMemoryTaskManager> {
     }
 
     @Test
-    void updateTaskTest(){
+    void updateTaskTest() {
         int taskId = taskManager.createTask(task);
         taskManager.updateTask(new Task(1, "123", "456", TaskStatus.DONE));
         assertEquals(taskManager.getTask(taskId).getTaskStatus(), TaskStatus.DONE, "Задача не обновилась");
     }
 
     @Test
-    void updateSubTaskTest(){
+    void updateSubTaskTest() {
         taskManager.createEpic(epic);
         int subTaskId = taskManager.createSubTask(subtask);
         taskManager.updateSubTask(new SubTask(2, "123", "456", 1, TaskStatus.DONE));
@@ -155,7 +156,7 @@ class InMemoryTaskManagerTest<T extends InMemoryTaskManager> {
     }
 
     @Test
-    void updateEpicTest(){
+    void updateEpicTest() {
         int epicId = taskManager.createEpic(epic);
         taskManager.createSubTask(subtask);
         taskManager.updateEpic(new Epic("123", "456", 1));
@@ -163,11 +164,11 @@ class InMemoryTaskManagerTest<T extends InMemoryTaskManager> {
     }
 
     @Test
-    void getSubTaskEpicMethodTest(){
+    void getSubTaskEpicMethodTest() {
         int epicId = taskManager.createEpic(epic);
         int subTaskId = taskManager.createSubTask(subtask);
         ArrayList<SubTask> subTaskTemp = taskManager.getAllSubTaskForEpic(epicId);
-        assertEquals(subTaskTemp.get(0).getId(), subTaskId , "выведен неверный список сабтасок эпика");
+        assertEquals(subTaskTemp.get(0).getId(), subTaskId, "выведен неверный список сабтасок эпика");
     }
 
 

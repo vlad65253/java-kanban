@@ -18,6 +18,7 @@ public class SubTask extends Task {
     public int getIdMain() {
         return idMain;
     }
+
     @Override
     public TypeTask getTypeTask() {
         return TypeTask.SUBTASK;

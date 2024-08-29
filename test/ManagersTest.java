@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ManagersTest{
+class ManagersTest {
 
     @Test
     void getDefault() {

@@ -31,6 +31,7 @@ public class Epic extends Task {
     public void addIdSubTask(Integer idSub) {
         idSubTask.add(idSub);
     }
+
     @Override
     public TypeTask getTypeTask() {
         return TypeTask.EPIC;

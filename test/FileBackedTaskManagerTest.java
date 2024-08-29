@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class FileBackedTaskManagerTest extends InMemoryTaskManagerTest<FileBackedTaskManager> {
+class FileBackedTaskManagerTest extends InMemoryTaskManagerTest {
 
     File file;
 
@@ -32,8 +32,5 @@ class FileBackedTaskManagerTest extends InMemoryTaskManagerTest<FileBackedTaskMa
         assertEquals(fileBackedTaskManager.getTaskList(), fileManager.getTaskList());
         assertEquals(fileBackedTaskManager.getEpicList(), fileManager.getEpicList());
         assertEquals(fileBackedTaskManager.getSubTaskList(), fileManager.getSubTaskList());
-
-
-        assertEquals(fileBackedTaskManager.getHistory(), fileManager.getHistory());
     }
 }

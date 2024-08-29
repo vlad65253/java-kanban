@@ -1,3 +1,4 @@
+import manager.InMemoryTaskManager;
 import manager.TaskManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest{
 
-    protected static TaskManager taskManager;
+    protected static TaskManager taskManager = new InMemoryTaskManager();
     protected static Task task;
     protected static Epic epic;
     protected static SubTask subtask;
@@ -24,6 +25,9 @@ class InMemoryTaskManagerTest{
         epic = new Epic("addNewEpicDescription", "addNewEpic");
 
         subtask = new SubTask("addNewSubtaskDescription", "addNewSubtask", 2, TaskStatus.NEW);
+        task.setId(1);
+        epic.setId(2);
+        subtask.setId(3);
 
     }
 
@@ -60,7 +64,7 @@ class InMemoryTaskManagerTest{
     @Test
     void addNewSubtask() {
         taskManager.createEpic(epic);
-
+        taskManager.createEpic(epic);
         final int subtaskId = taskManager.createSubTask(subtask);
         final SubTask savedSubtask = taskManager.getSubtask(subtaskId);
 
@@ -133,9 +137,10 @@ class InMemoryTaskManagerTest{
 
     @Test
     void deleteSubTaskByIdTest() {
+        taskManager.createTask(task);
         taskManager.createEpic(epic);
         int subtaskId = taskManager.createSubTask(subtask);
-        taskManager.delSubTaskById(subtaskId);
+        taskManager.delSubTaskById(3);
         assertNull(taskManager.getSubtask(subtaskId), "Задача не удалилась");
     }
 
@@ -148,22 +153,25 @@ class InMemoryTaskManagerTest{
 
     @Test
     void updateSubTaskTest() {
+        taskManager.createTask(task);
         taskManager.createEpic(epic);
         int subTaskId = taskManager.createSubTask(subtask);
-        taskManager.updateSubTask(new SubTask(2, "123", "456", 1, TaskStatus.DONE));
+        taskManager.updateSubTask(new SubTask(3, "123", "456", 2, TaskStatus.DONE));
         assertEquals(taskManager.getSubtask(subTaskId).getTaskStatus(), TaskStatus.DONE, "Подзадача не обновилась");
     }
 
     @Test
     void updateEpicTest() {
+        taskManager.createTask(task);
         int epicId = taskManager.createEpic(epic);
         taskManager.createSubTask(subtask);
-        taskManager.updateEpic(new Epic("123", "456", 1));
+        taskManager.updateEpic(new Epic("123", "456", 2));
         assertEquals(taskManager.getEpic(epicId).getName(), "123", "Эпик не обновился");
     }
 
     @Test
     void getSubTaskEpicMethodTest() {
+        taskManager.createTask(task);
         int epicId = taskManager.createEpic(epic);
         int subTaskId = taskManager.createSubTask(subtask);
         ArrayList<SubTask> subTaskTemp = taskManager.getAllSubTaskForEpic(epicId);

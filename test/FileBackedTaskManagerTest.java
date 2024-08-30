@@ -32,5 +32,6 @@ class FileBackedTaskManagerTest extends InMemoryTaskManagerTest {
         assertEquals(fileBackedTaskManager.getTaskList(), fileManager.getTaskList());
         assertEquals(fileBackedTaskManager.getEpicList(), fileManager.getEpicList());
         assertEquals(fileBackedTaskManager.getSubTaskList(), fileManager.getSubTaskList());
+        fileBackedTaskManager.setId(0);
     }
 }

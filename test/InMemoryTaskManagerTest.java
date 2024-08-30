@@ -1,6 +1,5 @@
 import manager.InMemoryTaskManager;
 import manager.TaskManager;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tasks.Epic;
@@ -8,7 +7,6 @@ import tasks.SubTask;
 import tasks.Task;
 import tasks.TaskStatus;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -61,10 +59,7 @@ class InMemoryTaskManagerTest {
     void addNewSubtask() {
         taskManager.createTask(task);
         int epicId = taskManager.createEpic(epic);
-
-
         int subtaskId = taskManager.createSubTask(new SubTask("addNewSubtaskDescription", "addNewSubtask", epicId, TaskStatus.NEW));
-        System.out.println(subtaskId);
         for(SubTask temp: taskManager.getSubTaskList()){
             System.out.println(temp.getId());
         }

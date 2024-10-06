@@ -1,5 +1,7 @@
 package tasks;
 
+import manager.TypeTask;
+
 import java.util.Objects;
 
 public class Task {
@@ -82,5 +84,9 @@ public class Task {
             hash = hash + description.hashCode();
         }
         return hash;
+    }
+
+    public TypeTask getTypeTask() {
+        return TypeTask.TASK;
     }
 }

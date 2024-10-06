@@ -2,7 +2,6 @@ import manager.InMemoryTaskManager;
 import manager.TaskManager;
 import org.junit.jupiter.api.Test;
 import tasks.SubTask;
-import tasks.TaskStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
 

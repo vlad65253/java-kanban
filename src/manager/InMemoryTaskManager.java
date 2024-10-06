@@ -282,7 +282,7 @@ public class InMemoryTaskManager implements TaskManager {
         List<Task> taskList = getPrioritized();
         if (task.getStartTime() != null && task.getEndTime() != null) {
             for (Task task1 : taskList) {
-                if (task1.getId() == task.getId()) prioritized.remove(task1);
+                if (task1.getId().equals(task.getId())) prioritized.remove(task1);
                 if (checkForIntersection(task, task1)) {
                     return;
                 }

@@ -21,9 +21,9 @@ class InMemoryHistoryManagerTest {
 
     @BeforeAll
     static void beforeAll() {
-        task = new Task("Test addNewTask", "Test addNewTask description", TaskStatus.NEW);
+        task = new Task("Test addNewTask", "Test addNewTask description");
         epic = new Epic("Test addNewTask", "Test addNewTask description");
-        subtask = new SubTask("Test addNewTask", "Test addNewTask description", 2, TaskStatus.NEW);
+        subtask = new SubTask("Test addNewTask", "Test addNewTask description", 2);
 
         task.setId(1);
         epic.setId(2);

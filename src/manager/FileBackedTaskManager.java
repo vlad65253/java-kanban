@@ -13,7 +13,7 @@ import static manager.TypeTask.*;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
     private final File file;
-    private static final String HEADER = "id,type,name,status,description,epic\n";
+    private static final String HEADER = "id,type,name,status,description,start,end,duration,epic\n";
 
     public FileBackedTaskManager(File file) {
         this.file = file;
@@ -26,7 +26,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 Files.delete(file.toPath());
             }
         } catch (IOException e) {
-            throw new ManagerSaveException("Не удалось найти файл", e);
+            throw new ManagerSaveException("Не удалось найти файл");
         }
 
         try (FileWriter fw = new FileWriter(file, StandardCharsets.UTF_8)) {
@@ -45,7 +45,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             }
 
         } catch (IOException e) {
-            throw new ManagerSaveException("Не удалось вписать значения в файл", e);
+            throw new ManagerSaveException("Не удалось вписать значения в файл");
         }
 
     }
@@ -67,12 +67,13 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 } else {
                     fileManager.libraryTask.put(task.getId(), task);
                 }
-                if (fileManager.getId() < task.getId()) {
-                    fileManager.setId(task.getId());
+                if (fileManager.id < task.getId()) {
+                    fileManager.id = task.getId();
                 }
+                fileManager.addPrioritized(task);
             }
         } catch (IOException e) {
-            throw new ManagerSaveException("Не удалось получить данные из файла", e);
+            throw new ManagerSaveException("Не удалось получить данные из файла");
         }
         return fileManager;
     }

@@ -2,30 +2,37 @@ package tasks;
 
 import manager.TypeTask;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Task {
     private Integer id;
     private String name;
     private String description;
-    private TaskStatus taskStatus = TaskStatus.NEW;
+    private TaskStatus taskStatus;
+    private Duration duration;
+    LocalDateTime startTime;
 
-    public Task(String name, String description, TaskStatus taskStatus) {
-        this.name = name;
+    public Task(String description, String name) {
         this.description = description;
+        this.name = name;
+        taskStatus = TaskStatus.NEW;
+    }
+
+    public Task(String description, String name, TaskStatus taskStatus) {
+        this.description = description;
+        this.name = name;
         this.taskStatus = taskStatus;
     }
 
-    public Task(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
-    public Task(Integer id, String name, String description, TaskStatus taskStatus) {
-        this.name = name;
-        this.description = description;
-        this.taskStatus = taskStatus;
+    public Task(int id, String name, TaskStatus taskStatus, String description, LocalDateTime startTime, Duration duration) {
         this.id = id;
+        this.name = name;
+        this.taskStatus = taskStatus;
+        this.description = description;
+        this.startTime = startTime;
+        this.duration = duration;
     }
 
     public void setId(Integer id) {
@@ -60,15 +67,37 @@ public class Task {
         return taskStatus;
     }
 
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        if (duration == null) {
+            return startTime;
+        }
+        return startTime.plus(duration);
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null) return false;
         if (this.getClass() != obj.getClass()) return false;
         Task otherTask = (Task) obj;
-        return Objects.equals(id, otherTask.id) &&
-                Objects.equals(name, otherTask.name) &&
-                Objects.equals(description, otherTask.description);
+        return Objects.equals(id, otherTask.id) && Objects.equals(name, otherTask.name) && Objects.equals(description, otherTask.description);
     }
 
     @Override

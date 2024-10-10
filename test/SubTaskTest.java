@@ -2,7 +2,6 @@ import manager.InMemoryTaskManager;
 import manager.TaskManager;
 import org.junit.jupiter.api.Test;
 import tasks.SubTask;
-import tasks.TaskStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,8 +11,8 @@ class SubTaskTest {
 
     @Test
     public void taskEqualsById() {
-        SubTask subtask = new SubTask("Помыть пол", "Уборка", 3, TaskStatus.NEW);
-        SubTask subtask1 = new SubTask("Пропылесосить ковры", "Уборка", 3, TaskStatus.IN_PROGRESS);
+        SubTask subtask = new SubTask("Помыть пол", "Уборка", 3);
+        SubTask subtask1 = new SubTask("Пропылесосить ковры", "Уборка", 3);
 
         taskManager.createSubTask(subtask);
         taskManager.createSubTask(subtask1);

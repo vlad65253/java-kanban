@@ -12,7 +12,7 @@ import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
 
-    private int id = 1;
+    protected int id = 1;
     protected final HashMap<Integer, Task> libraryTask = new HashMap<>();
     protected final HashMap<Integer, Epic> libraryEpic = new HashMap<>();
     protected final HashMap<Integer, SubTask> librarySubTask = new HashMap<>();
@@ -21,14 +21,6 @@ public class InMemoryTaskManager implements TaskManager {
 
     public InMemoryTaskManager() {
         prioritized = new TreeSet<>(Comparator.comparing(Task::getStartTime));
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override
@@ -92,7 +84,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void delAllSubTask() {
-        prioritized.removeAll(libraryEpic.values());
+        prioritized.removeAll(librarySubTask.values());
         for (Task k : librarySubTask.values()) {
             historyManager.remove(k.getId());
         }
@@ -141,7 +133,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public int createTask(Task task) {
         task.setId(id);
-        validatePrioritized(task);
+        checkIntersection(task);
         addPrioritized(task);
         libraryTask.put(id, task);
         id++;
@@ -159,7 +151,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public int createSubTask(SubTask subTask) {
         subTask.setId(id);
-        validatePrioritized(subTask);
+        checkIntersection(subTask);
         addPrioritized(subTask);
         Epic epic = libraryEpic.get(subTask.getIdMain());
         if (libraryEpic.get(subTask.getIdMain()) != null) {
@@ -176,7 +168,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void updateTask(Task task) {
         if (libraryTask.containsKey(task.getId())) {
             libraryTask.put(task.getId(), task);
-            validatePrioritized(task);
+            checkIntersection(task);
             addPrioritized(task);
         }
     }
@@ -201,7 +193,7 @@ public class InMemoryTaskManager implements TaskManager {
                     librarySubTask.put(subTask.getId(), subTask);
                     checkStatus(subTask.getIdMain());
                     updateEpicTime(epic);
-                    validatePrioritized(subTask);
+                    checkIntersection(subTask);
                     addPrioritized(subTask);
                 }
             }
@@ -282,7 +274,9 @@ public class InMemoryTaskManager implements TaskManager {
         List<Task> taskList = getPrioritized();
         if (task.getStartTime() != null && task.getEndTime() != null) {
             for (Task task1 : taskList) {
-                if (task1.getId().equals(task.getId())) prioritized.remove(task1);
+                if (task1.getId().equals(task.getId())) {
+                    prioritized.remove(task1);
+                }
                 if (checkForIntersection(task, task1)) {
                     return;
                 }
@@ -297,7 +291,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     }
 
-    private void validatePrioritized(Task task) {
+    private void checkIntersection(Task task) {
         if (task == null || task.getStartTime() == null) return;
         List<Task> taskList = getPrioritized();
 

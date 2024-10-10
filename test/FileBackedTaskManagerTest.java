@@ -43,5 +43,7 @@ class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
         assertEquals(fileBackedTaskManager.getTaskList(), fileManager.getTaskList());
         assertEquals(fileBackedTaskManager.getEpicList(), fileManager.getEpicList());
         assertEquals(fileBackedTaskManager.getSubTaskList(), fileManager.getSubTaskList());
+
+        assertEquals(fileBackedTaskManager.getPrioritized(), fileManager.getPrioritized());
     }
 }

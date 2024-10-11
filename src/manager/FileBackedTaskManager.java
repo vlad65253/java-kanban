@@ -64,13 +64,14 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 } else if (task.getTypeTask().equals(TypeTask.SUBTASK)) {
                     fileManager.librarySubTask.put(task.getId(), (SubTask) task);
                     fileManager.libraryEpic.get(((SubTask) task).getIdMain()).addIdSubTask(task.getId());
+                    fileManager.addPrioritized(task);
                 } else {
                     fileManager.libraryTask.put(task.getId(), task);
+                    fileManager.addPrioritized(task);
                 }
                 if (fileManager.id < task.getId()) {
                     fileManager.id = task.getId();
                 }
-                fileManager.addPrioritized(task);
             }
         } catch (IOException e) {
             throw new ManagerSaveException("Не удалось получить данные из файла");

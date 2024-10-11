@@ -1,4 +1,5 @@
 import manager.FileBackedTaskManager;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -11,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
     File file;
 
-    FileBackedTaskManagerTest() throws IOException {
+    @BeforeEach
+    void createFileBackTaskManagerTest() throws IOException {
         file = File.createTempFile("test", ".csv");
         taskManager = new FileBackedTaskManager(file);
     }

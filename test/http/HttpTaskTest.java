@@ -170,7 +170,7 @@ class HttpTaskTest {
 
     @Test
     void deleteTask() throws IOException, InterruptedException {
-        Task task1 = new Task( "task1", "description1");
+        Task task1 = new Task("task1", "description1");
         manager.createTask(task1);
 
         HttpClient client = HttpClient.newHttpClient();

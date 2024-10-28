@@ -1,6 +1,7 @@
 package manager;
 
 import exception.ManagerSaveException;
+import exception.NotFoundException;
 import tasks.Epic;
 import tasks.SubTask;
 import tasks.Task;
@@ -156,6 +157,9 @@ public class InMemoryTaskManager implements TaskManager {
     public Task getTask(Integer id) {
         Task task = libraryTask.get(id);
         historyManager.add(task);
+        if (task == null) {
+            throw new NotFoundException("Task с этим айди нет: " + id);
+        }
         return task;
     }
 
@@ -163,6 +167,9 @@ public class InMemoryTaskManager implements TaskManager {
     public Epic getEpic(Integer id) {
         Epic epic = libraryEpic.get(id);
         historyManager.add(epic);
+        if (epic == null) {
+            throw new NotFoundException("Epic с этим айди нет: " + id);
+        }
         return epic;
     }
 
@@ -170,6 +177,9 @@ public class InMemoryTaskManager implements TaskManager {
     public SubTask getSubtask(Integer id) {
         SubTask subtask = librarySubTask.get(id);
         historyManager.add(subtask);
+        if (subtask == null) {
+            throw new NotFoundException("Subtask с этим айди нет: " + id);
+        }
         return subtask;
     }
 

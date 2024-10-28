@@ -2,7 +2,7 @@ package manager.http.handlers;
 
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
-import exception.ManagerSaveException;
+import exception.NotFoundException;
 import manager.TaskManager;
 import tasks.Task;
 
@@ -45,10 +45,8 @@ public class TaskHandlers extends BaseHttpHandler {
                     sendNotFound(exchange);
                     break;
             }
-        } catch (NullPointerException e) {
+        } catch (NotFoundException e) {
             sendNotFound(exchange);
-        } catch (ManagerSaveException e) {
-            sendHasInteractions(exchange);
         } catch (Exception e) {
             writeResponse(exchange, 500, "");
         }

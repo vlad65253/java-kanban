@@ -20,10 +20,10 @@ public class HistoryHandler extends BaseHttpHandler {
             try {
                 sendText(exchange, gson.toJson(taskManager.getHistory()));
             } catch (Exception e) {
-                writeResponse(exchange, 500, "");
+                writeResponse(exchange, 500, "Ошибка на стороне сервера");
             }
         } else {
-            writeResponse(exchange, 400, "");
+            writeResponse(exchange, 400, "Ошибка на стороне клиента");
         }
     }
 }

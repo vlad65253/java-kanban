@@ -2,7 +2,7 @@ package manager.http.handlers;
 
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
-import exception.ManagerSaveException;
+import exception.InteractionsException;
 import manager.TaskManager;
 import tasks.Epic;
 
@@ -47,12 +47,10 @@ public class EpicHandlers extends BaseHttpHandler {
                     sendNotFound(exchange);
                     break;
             }
-        } catch (NullPointerException e) {
-            sendNotFound(exchange);
-        } catch (ManagerSaveException e) {
+        } catch (InteractionsException e) {
             sendHasInteractions(exchange);
         } catch (Exception e) {
-            writeResponse(exchange, 500, "");
+            writeResponse(exchange, 500, "Ошибка в эндпоинте");
         }
     }
 }

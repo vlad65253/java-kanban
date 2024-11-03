@@ -6,30 +6,41 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class SubTask extends Task {
-    private final int idMain;
 
-    public SubTask(String description, String name, int idMain) {
+    private final int epicId;
+
+    public SubTask(String description, String name, int epicId) {
         super(description, name);
-        this.idMain = idMain;
+        this.epicId = epicId;
     }
 
-    public SubTask(String description, String name, TaskStatus status, int idMain) {
+    public SubTask(String description, String name, TaskStatus status, int epicId) {
         super(description, name, status);
-        this.idMain = idMain;
+        this.epicId = epicId;
     }
 
     public SubTask(int id, String name, TaskStatus status, String description, LocalDateTime startTime,
-                   Duration duration, int idMain) {
+                   Duration duration, int epicId) {
         super(id, name, status, description, startTime, duration);
-        this.idMain = idMain;
+        this.epicId = epicId;
     }
 
-    public int getIdMain() {
-        return idMain;
+    public int getEpicId() {
+        return epicId;
     }
 
     @Override
-    public TypeTask getTypeTask() {
+    public TypeTask getType() {
         return TypeTask.SUBTASK;
+    }
+
+    @Override
+    public String toString() {
+        return "SubTask {" +
+                "Описание ='" + getDescription() + '\'' +
+                ", Айди задачи =" + getId() +
+                ", Название ='" + getName() + '\'' +
+                ", Статус выполнения: " + getStatus() +
+                '}';
     }
 }

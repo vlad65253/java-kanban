@@ -3,7 +3,6 @@ package manager;
 import tasks.Epic;
 import tasks.SubTask;
 import tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +42,8 @@ public interface TaskManager {
     void updateTask(Task task);
 
     void updateEpic(Epic epic);
+
+    void updateEpicStatus(Epic epic);
 
     void updateSubTask(SubTask subTask);
 

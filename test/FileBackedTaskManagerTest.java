@@ -1,5 +1,5 @@
+
 import manager.FileBackedTaskManager;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
+
     File file;
 
-    @BeforeEach
-    void createFileBackTaskManagerTest() throws IOException {
+    FileBackedTaskManagerTest() throws IOException {
         file = File.createTempFile("test", ".csv");
         taskManager = new FileBackedTaskManager(file);
     }
@@ -26,8 +26,6 @@ class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
         task.setDuration(Duration.ofMinutes(15));
         fileBackedTaskManager.createTask(task);
 
-        epic.setStartTime(LocalDateTime.of(2024, 8, 10, 16, 0));
-        epic.setDuration(Duration.ofMinutes(15));
         fileBackedTaskManager.createEpic(epic);
 
         subtask.setStartTime(LocalDateTime.of(2024, 8, 10, 17, 0));
@@ -46,6 +44,7 @@ class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
         assertEquals(fileBackedTaskManager.getEpicList(), fileManager.getEpicList());
         assertEquals(fileBackedTaskManager.getSubTaskList(), fileManager.getSubTaskList());
 
+        // сравниваем результаты двух объектов классов, до выгрузки и после выгрузки
         assertEquals(fileBackedTaskManager.getPrioritized(), fileManager.getPrioritized());
     }
 }

@@ -7,72 +7,36 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Task {
-    private Integer id;
-    private String name;
     private String description;
-    private TaskStatus taskStatus;
+    private int id;
+    private String name;
+    private TaskStatus status;
     private Duration duration;
-    LocalDateTime startTime;
+    private LocalDateTime startTime;
 
     public Task(String description, String name) {
         this.description = description;
         this.name = name;
-        taskStatus = TaskStatus.NEW;
+        status = TaskStatus.NEW;
     }
 
-    public Task(String description, String name, TaskStatus taskStatus) {
+    public Task(String description, String name, TaskStatus status) {
         this.description = description;
         this.name = name;
-        this.taskStatus = taskStatus;
+        this.status = status;
     }
 
-    public Task(int id, String name, TaskStatus taskStatus, String description, LocalDateTime startTime, Duration duration) {
+    public Task(int id, String name, TaskStatus status, String description, LocalDateTime startTime, Duration duration) {
         this.id = id;
         this.name = name;
-        this.taskStatus = taskStatus;
+        this.status = status;
         this.description = description;
         this.startTime = startTime;
         this.duration = duration;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setTaskStatus(TaskStatus taskStatus) {
-        this.taskStatus = taskStatus;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public TaskStatus getTaskStatus() {
-        return taskStatus;
-    }
-
     public LocalDateTime getStartTime() {
         return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
     }
 
     public LocalDateTime getEndTime() {
@@ -90,32 +54,66 @@ public class Task {
         this.duration = duration;
     }
 
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+
+    public TypeTask getType() {
+        return TypeTask.TASK;
+    }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (this.getClass() != obj.getClass()) return false;
-        Task otherTask = (Task) obj;
-        return Objects.equals(id, otherTask.id) && Objects.equals(name, otherTask.name) && Objects.equals(description, otherTask.description);
+    public String toString() {
+        return "Task {" +
+                "Описание ='" + description + '\'' +
+                ", Айди задачи =" + id +
+                ", Название ='" + name + '\'' +
+                ", Статус выполнения: " + status +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id == task.id;
     }
 
     @Override
     public int hashCode() {
-        int hash = 17;
-        if (id != null) {
-            hash = id.hashCode();
-        }
-        if (name != null) {
-            hash = hash + name.hashCode();
-        }
-        if (description != null) {
-            hash = hash + description.hashCode();
-        }
-        return hash;
-    }
-
-    public TypeTask getTypeTask() {
-        return TypeTask.TASK;
+        return Objects.hash(id);
     }
 }

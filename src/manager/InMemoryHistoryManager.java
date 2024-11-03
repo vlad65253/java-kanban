@@ -2,29 +2,28 @@ package manager;
 
 import tasks.Task;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
-    private final MyLinkedList history = new MyLinkedList();
+    private final CustomLinkedList history = new CustomLinkedList();
 
     @Override
     public void add(Task task) {
-        if (task == null) {
-            return;
-        }
-        remove(task.getId());
-        history.linkList(task);
+        history.linkLast(task);
     }
 
     @Override
     public void remove(int id) {
-        history.remoteNode(history.myMap.get(id));
+        history.removeNode(history.customMap.get(id));
     }
 
     @Override
     public List<Task> getHistory() {
-        return history.getTasks();
+        return history.getTaskList();
     }
 
     private static class Node {
@@ -32,34 +31,45 @@ public class InMemoryHistoryManager implements HistoryManager {
         private final Task task;
         private Node next;
 
-        public Node(Task task, Node prev, Node next) {
+
+        private Node(Task task) {
             this.task = task;
-            this.prev = prev;
-            this.next = next;
+        }
+
+        private Task getTask() {
+            return task;
         }
 
     }
 
-    private static class MyLinkedList {
+    private static class CustomLinkedList {
+        private final Map<Integer, Node> customMap = new HashMap<>();
         private Node head;
         private Node tail;
-        private final Map<Integer, Node> myMap = new HashMap<>();
 
-        private void linkList(Task task) {
-            Node newNode = new Node(task, tail, null);
+
+        private void linkLast(Task task) {
+            if (customMap.containsKey(task.getId())) {
+                removeNode(customMap.get(task.getId()));
+            }
+
+            Node newNode = new Node(task);
 
             if (tail == null) {
+                tail = newNode;
                 head = newNode;
             } else {
+                newNode.prev = tail;
                 tail.next = newNode;
+                tail = newNode;
             }
-            tail = newNode;
-            myMap.put(task.getId(), newNode);
+
+            customMap.put(task.getId(), newNode);
         }
 
-        private void remoteNode(Node node) {
+        private void removeNode(Node node) {
             if (node != null) {
-                myMap.remove(node.task.getId());
+                customMap.remove(node.task.getId());
                 Node prev = node.prev;
                 Node next = node.next;
 
@@ -82,15 +92,14 @@ public class InMemoryHistoryManager implements HistoryManager {
             }
         }
 
-        private List<Task> getTasks() {
-            List<Task> tasksList = new ArrayList<>();
+        private List<Task> getTaskList() {
+            List<Task> list = new ArrayList<>();
             Node element = head;
-
             while (element != null) {
-                tasksList.add(element.task);
+                list.add(element.getTask());
                 element = element.next;
             }
-            return tasksList;
+            return list;
         }
     }
 }
